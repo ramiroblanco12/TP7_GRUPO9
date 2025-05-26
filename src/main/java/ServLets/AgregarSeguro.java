@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dominio.SeguroDao;
 import dominio.TipoSeguros;
 import dominio.TipoSegurosDao;
 
@@ -34,11 +35,14 @@ public class AgregarSeguro extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		TipoSegurosDao tipoSegurosDao = new TipoSegurosDao();
 	    ArrayList<TipoSeguros> listaTipoSeguros = tipoSegurosDao.obtenerTipoSeguros();
-
-
 	    request.setAttribute("listaTipoSeguros", listaTipoSeguros);
-
-	
+	    
+	    SeguroDao seguroDao = new SeguroDao();
+	    int ultimoId = seguroDao.obtenerUltimoIdUsuario();
+	    int siguienteId = ultimoId + 1;
+	    request.setAttribute("siguienteId", siguienteId);
+	    
+	    
 	    RequestDispatcher dispatcher = request.getRequestDispatcher("AgregarSeguro.jsp");
 	    dispatcher.forward(request, response);
 	}

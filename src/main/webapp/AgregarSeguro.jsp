@@ -20,10 +20,8 @@
 <table>
 <tr>
 	<td>Id Seguro</td>
-	<td><%
-	int IDSeguro=2;
-	%>
-	<%= IDSeguro %></td>
+	<td>
+	<%= request.getAttribute("siguienteId") %></td>
 </tr>
 <tr>
 	<td>Descripción</td>

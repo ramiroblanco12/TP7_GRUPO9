@@ -9,7 +9,7 @@ public class TipoSegurosDao {
 	private String host = "jdbc:mysql://localhost:3306/";
 	private String user = "root";
 	//cambiar a tu contraseña de bd
-	private String pass = "password";
+	private String pass = "root";
 	private String dbName = "SegurosGroup";
 	
 	
