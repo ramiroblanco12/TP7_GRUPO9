@@ -1,3 +1,5 @@
+<%@page import="dominio.TipoSeguros"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -27,14 +29,37 @@
 	<td>Descripción</td>
 	<td><input type="text" name="txtDescripcion"></td>
 </tr>
+                   
+	
+<% 
+ArrayList<TipoSeguros> listaTipoSeguros = null;
+if (request.getAttribute("listaTipoSeguros") != null) {
+    listaTipoSeguros = (ArrayList<TipoSeguros>) request.getAttribute("listaTipoSeguros");
+}
+%>
+
 <tr>
-	<td>Tipo de seguro:</td>
-	<td><select name="tipoSeguro">
-		<option>Seguro de casa</option>
-		<option>Seguro de auto</option>
-		<option>Seguro de vida</option>
-		</select></td>            
+    <td>Tipo de seguro:</td>
+    <td>
+        <select name="tipoSeguro">
+            <% 
+            if (listaTipoSeguros != null) {
+                for (TipoSeguros tipoSeguro : listaTipoSeguros) {
+            %>
+            <option value="<%= tipoSeguro.getIdTipo() %>">
+                <%= tipoSeguro.getDescripcion() %>
+            </option>
+            <% 
+                }
+            } 
+            %>
+        </select>
+    </td>
 </tr>
+
+	
+
+
 <tr>
 	<td>Costo contratación:</td>
 	<td><input type="text" name="txtCostocontratacion"></td>
