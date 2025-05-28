@@ -14,7 +14,7 @@
 <a href="Inicio">INICIO</a>
 <a href="AgregarSeguro">AGREGAR SEGURO</a>
 
-<form action="get" action= "ListarSeguro">
+<form method="get" action= "ListarSeguro">
 	<a href="ListarSeguro">LISTAR SEGURO</a>
 </form>
 <h1>SOY LA PAGINA DE LISTAR SEGURO</h1>
