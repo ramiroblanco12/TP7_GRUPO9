@@ -13,7 +13,7 @@
 <a href="AgregarSeguro">AGREGAR SEGURO</a>
 <a href="ListarSeguro">LISTAR SEGURO</a>
 
-<form action="AgregarSeguro.jsp" method="get">
+<form action="AgregarSeguro.jsp" method="post">
 
 <h1>Agregar seguros</h1>
 
@@ -70,6 +70,11 @@ if (request.getAttribute("listaTipoSeguros") != null) {
 	<td></td>
 	<td><input type="submit" value="Aceptar" name="btnAceptar"></td>
 </tr>
+
+<% if (request.getAttribute("error") != null) { %>
+    <p style="color: red;"><%= request.getAttribute("error") %></p>
+<% } %>
+
 </table>
 
 </form>

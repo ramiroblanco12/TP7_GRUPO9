@@ -34,4 +34,33 @@ public class SeguroDao {
 
 	    return ultimoId;
 	}
+	
+	
+	public boolean agregarSeguro(Seguro seguro) {
+	    Connection con = null;
+	    boolean exito = false;
+	    
+	    try {
+	        con = DriverManager.getConnection(host + dbName, user, pass);
+	        String sql = "INSERT INTO seguros (descripcion, idTipo, costoContratacion, costoAsegurado) VALUES (?, ?, ?, ?)";
+	        
+	        PreparedStatement st = con.prepareStatement(sql);
+	        st.setString(1, seguro.getDescripcion());
+	        st.setInt(2, seguro.getIdtipo());
+	        st.setFloat(3, seguro.getCostoContracion());
+	        st.setFloat(4, seguro.getCostoAsegurado());
+	        
+	        int filasAfectadas = st.executeUpdate();
+	        exito = (filasAfectadas > 0);
+	        
+	    } catch (Exception e) {
+	        System.out.println("Error al agregar seguro: " + e.getMessage());
+	    } finally {
+	        if (con != null) {
+	            try { con.close(); } catch (Exception e) { e.printStackTrace(); }
+	        }
+	    }
+	    return exito;
+	}
+	
 }
