@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 public class SeguroDao {
 	private String host = "jdbc:mysql://localhost:3306/";
@@ -61,6 +62,40 @@ public class SeguroDao {
 	        }
 	    }
 	    return exito;
+	}
+	
+	public ArrayList<Seguro> listarSeguros(){
+		 try {
+	         Class.forName("com.mysql.jdbc.Driver");
+	      } catch (ClassNotFoundException var6) {
+	         var6.printStackTrace();
+	      }
+
+	      ArrayList<Seguro> lista = new ArrayList<Seguro>();
+	      Connection conn = null;
+
+	      try {
+	         conn = DriverManager.getConnection(this.host + this.dbName, this.user, this.pass);
+	         Statement st = conn.createStatement();
+	         ResultSet rs = st.executeQuery("Select idSeguro, descripcion, idTipo, costoContratacion, costoAsegurado FROM seguros");
+
+	         while(rs.next()) {
+	            Seguro seguros = new Seguro();
+	            seguros.setId(rs.getInt("idSeguro"));
+	            seguros.setDescripcion(rs.getString("descripcion"));
+	            seguros.setIdtipo(rs.getInt("idTipo"));
+	            seguros.setCostoContracion(rs.getFloat("costoContratacion"));
+	            seguros.setCostoAsegurado(rs.getFloat("costoAsegurado"));
+	            lista.add(seguros);
+	         }
+
+	         conn.close();
+	      } catch (Exception var7) {
+	         var7.printStackTrace();
+	      }
+
+	      return lista;
+		
 	}
 	
 }
