@@ -52,40 +52,43 @@ public class AgregarSeguro extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String descripcion = request.getParameter("txtDescripcion");
-	    String tipoSeguroStr = request.getParameter("tipoSeguro");
-	    String costoContratacionStr = request.getParameter("txtCostocontratacion");
-	    String costoAseguradoStr = request.getParameter("txtCostomaximo");
-	    
-	   
-	    if (descripcion.isEmpty() || tipoSeguroStr.isEmpty() || costoContratacionStr.isEmpty() || costoAseguradoStr.isEmpty()) {
-	        request.setAttribute("error", "Todos los campos son obligatorios");
-	        doGet(request, response); 
-	        return;
-	    }
-	    
-	    try {
-	        
-	        int idTipo = Integer.parseInt(tipoSeguroStr);
-	        float costoContratacion = Float.parseFloat(costoContratacionStr);
-	        float costoAsegurado = Float.parseFloat(costoAseguradoStr);
-	        
-	        
-	        Seguro nuevoSeguro = new Seguro(0, descripcion, idTipo, costoContratacion, costoAsegurado);
-	        SeguroDao seguroDao = new SeguroDao();
-	        boolean Filas = seguroDao.agregarSeguro(nuevoSeguro);
-	        
-	        if (Filas) {
-	            response.sendRedirect("ListarSeguro"); 
-	        } else {
-	            request.setAttribute("error", "Error al guardar el seguro");
-	            doGet(request, response);
-	        }
-	        
-	    } catch (NumberFormatException e) {
-	        request.setAttribute("error", "Formato inválido en números");
-	        doGet(request, response);
-	    }
+		if(request.getParameter("btnAceptar")!=null) {
+			String descripcion = request.getParameter("txtDescripcion");
+		    String tipoSeguroStr = request.getParameter("tipoSeguro");
+		    String costoContratacionStr = request.getParameter("txtCostocontratacion");
+		    String costoAseguradoStr = request.getParameter("txtCostomaximo");
+		    
+		   
+		    if (descripcion.isEmpty() || tipoSeguroStr.isEmpty() || costoContratacionStr.isEmpty() || costoAseguradoStr.isEmpty()) {
+		        request.setAttribute("error", "Todos los campos son obligatorios");
+		        doGet(request, response); 
+		        return;
+		    }
+		    
+		    try {
+		        
+		        int idTipo = Integer.parseInt(tipoSeguroStr);
+		        float costoContratacion = Float.parseFloat(costoContratacionStr);
+		        float costoAsegurado = Float.parseFloat(costoAseguradoStr);
+		        
+		        
+		        Seguro nuevoSeguro = new Seguro(0, descripcion, idTipo, costoContratacion, costoAsegurado);
+		        SeguroDao seguroDao = new SeguroDao();
+		        boolean Filas = seguroDao.agregarSeguro(nuevoSeguro);
+		        
+		        if (Filas) {
+		            response.sendRedirect("ListarSeguro"); 
+		        } else {
+		            request.setAttribute("error", "Error al guardar el seguro");
+		            doGet(request, response);
+		        }
+		        
+		    } catch (NumberFormatException e) {
+		        request.setAttribute("error", "Formato inválido en números");
+		        doGet(request, response);
+		    }
+		}
+		
 	}
 
 }

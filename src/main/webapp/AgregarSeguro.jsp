@@ -13,7 +13,7 @@
 <a href="AgregarSeguro">AGREGAR SEGURO</a>
 <a href="ListarSeguro">LISTAR SEGURO</a>
 
-<form action="AgregarSeguro.jsp" method="post">
+<form action="AgregarSeguro" method="post">
 
 <h1>Agregar seguros</h1>
 
