@@ -14,7 +14,7 @@
 	
 </form>
 
-<h1>Soy la pagina de incio</h1>
+<h1>Soy la pagina de inicio</h1>
 
 
 </body>
