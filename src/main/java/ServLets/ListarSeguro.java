@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import dominio.Seguro;
 import dominio.SeguroDao;
+import dominio.TipoSeguros;
+import dominio.TipoSegurosDao;
 
 /**
  * Servlet implementation class ListarSeguro
@@ -34,8 +36,22 @@ public class ListarSeguro extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
         SeguroDao seguroDao = new SeguroDao();
-        ArrayList<Seguro> listaSeguros = seguroDao.listarSeguros();
-        request.setAttribute("listaS", listaSeguros);
+        
+        TipoSegurosDao tipo = new TipoSegurosDao();
+        ArrayList<TipoSeguros> listaTipos = tipo.obtenerTipoSeguros();
+        request.setAttribute("listaTipos", listaTipos);
+        
+        
+        if(request.getParameter("btnFiltrar")!=null) {
+        int idTipo=Integer.parseInt(request.getParameter("tipos"));
+        	ArrayList<Seguro> listaSegurosFiltrada = seguroDao.listarSegurosFiltrados(idTipo);
+        	request.setAttribute("listaS", listaSegurosFiltrada);
+        }else {
+        	ArrayList<Seguro> listaSeguros = seguroDao.listarSeguros();
+        	request.setAttribute("listaS", listaSeguros);
+        }
+        
+        
         RequestDispatcher dispatcher = request.getRequestDispatcher("ListarSeguro.jsp");
         dispatcher.forward(request, response);
         
@@ -44,8 +60,9 @@ public class ListarSeguro extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		
+		
 	}
 
 }

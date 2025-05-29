@@ -3,6 +3,7 @@ package dominio;
 public class Seguro {
 	private int id;
 	private String descripcion;
+	private String descripcionTipo;
 	private int idtipo;
 	private float costoContracion;
 	private float costoAsegurado;
@@ -32,6 +33,14 @@ public class Seguro {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+	
+	public String getDescripcionTipo() {
+		return descripcionTipo;
+	}
+
+	public void setDescripcionTipo(String descripcionTipo) {
+		this.descripcionTipo = descripcionTipo;
 	}
 
 	public int getIdtipo() {

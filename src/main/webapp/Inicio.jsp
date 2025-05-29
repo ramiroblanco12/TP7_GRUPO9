@@ -9,8 +9,9 @@
 <body>
 <a href="Inicio">INICIO</a>
 <a href="AgregarSeguro">AGREGAR SEGURO</a>
+<a href="ListarSeguro">LISTAR SEGURO</a>
 <form action="get" action= "ListarSeguro">
-	<a href="ListarSeguro">LISTAR SEGURO</a>
+	
 </form>
 
 <h1>Soy la pagina de incio</h1>
